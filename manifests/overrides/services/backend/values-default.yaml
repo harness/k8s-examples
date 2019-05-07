@@ -1,0 +1,10 @@
+name: backend
+replicas: 1
+
+container:
+  image: ${artifact.metadata.image}
+  port: 80
+
+config:
+  env: backend
+  debug: 'true'
