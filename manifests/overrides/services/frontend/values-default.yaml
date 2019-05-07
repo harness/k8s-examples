@@ -1,0 +1,5 @@
+name: frontend
+replicas: 1
+
+container:
+  image: ${artifact.metadata.image}

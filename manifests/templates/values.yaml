@@ -1,0 +1,11 @@
+name: default
+replicas: 1
+
+container:
+  image: nginx:latest
+  port: 80
+
+config:
+  env: default
+
+  
