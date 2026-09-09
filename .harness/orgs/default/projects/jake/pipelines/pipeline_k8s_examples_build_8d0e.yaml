@@ -1,0 +1,22 @@
+pipeline:
+  name: pipeline_k8s_examples_build_8d0e
+  stages:
+    - id: build
+      name: build
+      runtime: cloud
+      clone:
+        enabled: true
+      cache:
+        enabled: true
+      steps:
+        - id: validate_manifests
+          name: Validate Manifests
+          run:
+            shell: bash
+            script: |-
+              echo "Repository contains only Kubernetes YAML manifests; no application language, build tool, or test framework is defined."
+              echo "Listing manifest files:"
+              find manifests -type f -name '*.yaml' -print
+  identifier: pipeline_k8s_examples_build_8d0e
+  tags:
+    onboarding: "true"
