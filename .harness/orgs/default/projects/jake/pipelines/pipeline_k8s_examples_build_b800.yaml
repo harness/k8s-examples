@@ -1,0 +1,30 @@
+pipeline:
+  name: pipeline_k8s_examples_build_b800
+  id: pipeline_k8s_examples_build_b800
+  stages:
+    - id: validate
+      name: Validate Manifests
+      runtime:
+        cloud: {}
+      clone:
+        enabled: true
+      cache:
+        enabled: true
+      steps:
+        - id: verify_manifests
+          name: Verify Kubernetes Manifests
+          run:
+            shell: bash
+            script: |-
+              set -euo pipefail
+              echo "Repository contains only Kubernetes YAML manifests; no build tool or test suite is defined."
+              echo "Listing manifest files:"
+              find manifests -type f -name '*.yaml' -print
+              count=$(find manifests -type f -name '*.yaml' | wc -l)
+              if [ "$count" -eq 0 ]; then
+                echo "No manifest YAML files found" >&2
+                exit 1
+              fi
+              echo "Found $count manifest file(s)."
+  tags:
+    onboarding: "true"
