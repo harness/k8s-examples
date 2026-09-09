@@ -1,0 +1,22 @@
+pipeline:
+  name: pipeline_k8s_examples_build_78a3
+  stages:
+    - id: validate
+      name: validate
+      runtime: cloud
+      clone:
+        enabled: true
+      cache:
+        enabled: true
+      steps:
+        - id: list_manifests
+          name: List Manifests
+          run:
+            shell: bash
+            script: |-
+              set -e
+              echo "Repository contains only Kubernetes manifest YAML (no application source, build, or tests)."
+              find manifests -type f -name '*.yaml' -print
+  identifier: pipeline_k8s_examples_build_78a3
+  tags:
+    onboarding: "true"
